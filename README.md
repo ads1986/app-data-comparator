@@ -50,14 +50,10 @@ the business actions, in other words, what we can do with the application.
 
 | Package                           | Class                                                            |
 | --------------------------------- |:----------------------------------------------------------------|
-| entity                            |  ``InputData`` : Domain class responsible for representing the |
-|                                   |    input data for analysis.|
-|                                   |  ``OutputData`` : Domain class responsible for maintaining the |
-|                                   |    messages related to analysis and returning the layers above  |
-| usecase                           |  ``DecodeDataException`` : Class responsible for handling domain|
-|                                   |    layer exceptions.|
-|                                   |  ``DataRepository`` : Interface that exposes the methods to be|
-|                                   |    implemented by the repository in the adapter layer|
+| entity                            |  ``InputData`` : Domain class responsible for representing the input data for analysis.|
+|                                   |  ``OutputData`` : Domain class responsible for maintaining the messages related to analysis and returning the layers above  |
+| usecase                           |  ``DecodeDataException`` : Class responsible for handling domain layer exceptions.|
+|                                   |  ``DataRepository`` : Interface that exposes the methods to be implemented by the repository in the adapter layer|
 |                                   |  ``CompareData`` : Use case responsible for comparing 2 decoded data|
 |                                   |  ``DecodeData`` : Use Case responsible to decode the base64 data to the original mode.|
 |                                   |  ``SaveData`` : Use Case responsible to persist the data object, using the DataRepository port.|
@@ -69,7 +65,7 @@ the business actions, in other words, what we can do with the application.
 |                                   |  ``IntegratedTests`` : Used to test the integration of all use case. |
 
 Adapter Layer
------
+-------------
 
 Is responsible to retrieve and store data from different number of sources (Database, device, file systems). In this
 layer I implement the interfaces defined by the usecases and provide data transformation to be used by the application.
@@ -98,21 +94,14 @@ adapter
 
 | Package                           | Class                                                            |
 | --------------------------------- |:----------------------------------------------------------------|
-| controller                        | ``RequestData`` : Class is responsible to receive the data and|
-|                                   | transform in an InputData object to send to an usecases|
-|                                   | ``ResponseData`` : Class is responsible to receive the data from|
-|                                   | an usecase and create an ResponseData object.                 |
+| controller                        | ``RequestData`` : Class is responsible to receive the data and transform in an InputData object to send to an usecases|
+|                                   | ``ResponseData`` : Class is responsible to receive the data from an usecase and create an ResponseData object.                 |
 |                                   | ``DataController`` : Controller that will be used by the application|
-| repository > memory-db            | ``DataDB`` : A model created based in an InputData, to be used  |
-|                                   | in the implementation of a repository.                        |
-|                                   | ``MemoryDataRepository`` : Provide a implementation of a simple |
-|                                   | in memory database solution to simulate a real database usage.|
-|                                   | At this point, we can implement for example the infrastructure 
-|                                   | to connect to a MongoDB or Postgres database. It will occur |
-|                                   | transparently through the application.|
+| repository > memory-db            | ``DataDB`` : A model created based in an InputData, to be used in the implementation of a repository.                        |
+|                                   | ``MemoryDataRepository`` : Provide a implementation of a simple in memory database solution to simulate a real database usage. At this point, we can implement for example the infrastructure to connect to a MongoDB or Postgres database. It will occur transparently through the application.|
 
 Application Layer
------
+-----------------
 
 The APIs will be exposed in this layer. I created two applications, using the Spring and Micronaut frameworks. 
 I include Micronaut to show what I've been learning and also to present the flexibility of the architecture. 
@@ -147,19 +136,11 @@ application
 
 | Appication                        | Class                                                            |
 | --------------------------------- |:----------------------------------------------------------------|
-| spring-app                        | ``Config`` : Using the notations @Configuration and @Bean, it performs |
-|                                   | the injection of all necessary objects and instantiates the DataController |
-|                                   | class that belongs to the Adapter layer. This class contains all the |
-|                                   | necessary dependencies for the application's controller.       |
-|                                   | ``SpringController`` : Exposes the apis using the Spring resources. |
-|                                   | In this class, we don't have any single business rule, or data transformation. |
-|                                   | We only deal with spring resources to the apis.                |
+| spring-app                        | ``Config`` : Using the notations @Configuration and @Bean, it performs the injection of all necessary objects and instantiates the DataController class that belongs to the Adapter layer. This class contains all the necessary dependencies for the application's controller.       |
+|                                   | ``SpringController`` : Exposes the apis using the Spring resources. In this class, we don't have any single business rule, or data transformation. We only deal with spring resources to the apis.                |
 |                                   | ``Application`` : Contains settings for Spring Boot startup and spring context.|
-| micro-app                         | ``Config`` : Manually I inject all necessary objects and I instantiate the Data 
-|                                   | Controller class that belongs to the Adapter layer. |
-|                                   | ``MicronautController`` : Exposes the apis using the Micronaut resources. |
-|                                   | In this class, we don't have any single business rule, or data transformation. |
-|                                   | We only deal with Microunaut resources to the apis.                |
+| micro-app                         | ``Config`` : Manually I inject all necessary objects and I instantiate the DataController class that belongs to the Adapter layer. |
+|                                   | ``MicronautController`` : Exposes the apis using the Micronaut resources. In this class, we don't have any single business rule, or data transformation. We only deal with Microunaut resources to the apis.                |
 |                                   | ``Application`` : Contains settings Micronaut to startup the application.|
 
 Configuration
