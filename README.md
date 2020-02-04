@@ -97,7 +97,7 @@ adapter
 | controller                        | ``RequestData`` : Class is responsible to receive the data and transform in an InputData object to send to an usecases|
 |                                   | ``ResponseData`` : Class is responsible to receive the data from an usecase and create an ResponseData object.                 |
 |                                   | ``DataController`` : Controller that will be used by the application|
-| repository > memory-db            | ``DataDB`` : A model created based in an InputData, to be used in the implementation of a repository.                        |
+| memory-db            | ``DataDB`` : A model created based in an InputData, to be used in the implementation of a repository.                        |
 |                                   | ``MemoryDataRepository`` : Provide a implementation of a simple in memory database solution to simulate a real database usage. At this point, we can implement for example the infrastructure to connect to a MongoDB or Postgres database. It will occur transparently through the application.|
 
 Application Layer
